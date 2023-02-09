@@ -1,7 +1,7 @@
 const { Pool } = require('pg');
 
 const pool = new Pool({
-  user: 'vagrant',
+  user: 'labber',
   password: '123',
   host: 'localhost',
   database: 'bootcampx'
@@ -15,7 +15,8 @@ JOIN assistance_requests ON teacher_id = teachers.id
 JOIN students ON student_id = students.id
 JOIN cohorts ON cohort_id = cohorts.id
 WHERE cohorts.name = '${process.argv[2] || 'JUL02'}'
-ORDER BY teacher;
+ORDER BY teacher
+RETURNING *;
 `)
 .then(res => {
   res.rows.forEach(row => {
